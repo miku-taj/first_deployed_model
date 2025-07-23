@@ -22,5 +22,5 @@ with col1:
   fig1 = px.histogram(df, x="species", color="island", barmode="group", title="Distribution of species across islands")
   st.plotly_chart(fig1, use_container_width=True)
 with col2:
-  fig2 = px.histogram(df, x="bill_length_mm", y="flipper_length_mm", color="species", title="Bill length vs Flipper length")
+  fig2 = px.scatter(df, x="bill_length_mm", y="flipper_length_mm", color="species", title="Bill length vs Flipper length")
   st.plotly_chart(fig2, use_container_width=True)
