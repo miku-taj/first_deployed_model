@@ -4,7 +4,7 @@ import numpy as np
 import category_encoders as ce
 import plotly.express as px
 from sklearn.model_selection import train_test_split
-from sklearn.metric import accuracy_score
+from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 
 st.set_page_config(page_title="Penguin Classifier", layout="wide")
