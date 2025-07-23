@@ -6,6 +6,7 @@ import plotly.express as px
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
 
 st.set_page_config(page_title="🐧 Penguin Classifier", layout="wide")
 st.title('🐧 Penguin Classifier')
@@ -33,3 +34,26 @@ X = df.drop(["species"], axis=1)
 y = df["species"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+encoder = ce.TargetEncoder(cols=['island', 'sex'])
+X_train_encoded = encoder.fit_transform(X_train, y_train)
+X_test_encoded = encoder.transform(X_test)
+
+models = {
+  'Decision Tree': DecisionTreeClassifier(random_state=42),
+  'KNN': KNeighborsClassifier()
+}
+
+results = []
+for name, model in models.items():
+  model.fit(X_train_encoded, y_train)
+  acc_train = accuracy_score(y_train, model.predict(X_train_encoded))
+  acc_test = accuracy_score(y_test, model.predict(X_test_encoded))
+  results.append({
+    'Model': name,
+    'Train Accuracy': acc_train,
+    'Test Accuracy': acc_test
+  })
+
+st.subheader("Comparing models metrics")
+st.table(pd.Dataframe(results))
