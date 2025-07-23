@@ -56,4 +56,4 @@ for name, model in models.items():
   })
 
 st.subheader("Comparing models metrics")
-st.table(pd.Dataframe(results))
+st.table(pd.DataFrame(results))
