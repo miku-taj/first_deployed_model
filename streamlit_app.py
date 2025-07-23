@@ -65,3 +65,17 @@ bill_length_input = st.sidebar.slider("Bill Length (mm)", float(df['bill_length_
 bill_depth_input = st.sidebar.slider("Bill Depth (mm)", float(df['bill_depth_mm'].min()), float(df['bill_depth_mm'].max()), float(df['bill_depth_mm'].mean()))
 flipper_length_input = st.sidebar.slider("Flipper Length (mm)", float(df['flipper_length_mm'].min()), float(df['flipper_length_mm'].max()), float(df['flipper_length_mm'].mean()))
 body_mass_input = st.sidebar.slider("Body Mass (g)", float(df['body_mass_g'].min()), float(df['body_mass_g'].max()), float(df['body_mass_g'].mean()))
+
+user_input = pd.DataFrame([{
+  'island': island_input,
+  'sex': sex_input,
+  'bill_length_mm': bill_length_input,
+  'bill_depth_mm': bill_depth_input,
+  'flipper_length_mm': flipper_length_input,
+  'body_mass_g': body_mass_input
+}])
+
+user_input_encoded = encoder.transform(user_input)
+for col in ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']:
+  user_input_encoded[col] = user_input[col].values
+user_input_encoded = user_input_encoded[X_train_encoded.columns]
