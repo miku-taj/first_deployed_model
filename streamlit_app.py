@@ -79,3 +79,12 @@ user_input_encoded = encoder.transform(user_input)
 for col in ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']:
   user_input_encoded[col] = user_input[col].values
 user_input_encoded = user_input_encoded[X_train_encoded.columns]
+
+st.sidebar.subheader("Prediction Results")
+
+for name, model in models.items():
+  pred = model.predict(user_input_encoded)[0]
+  proba = model.predict_proba(user_input_encoded)[0]
+  st.sidebar.markdown(f"**{name}: {pred}**")
+  proba_df = pd.DataFrame({'Species': model.classes_, 'Probability': proba})
+  st.sidebar.dataframe(proba_df, use_container_width=True)
