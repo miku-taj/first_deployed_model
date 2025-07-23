@@ -51,9 +51,17 @@ for name, model in models.items():
   acc_test = accuracy_score(y_test, model.predict(X_test_encoded))
   results.append({
     'Model': name,
-    'Train Accuracy': acc_train,
-    'Test Accuracy': acc_test
+    'Train Accuracy': round(acc_train, 2),
+    'Test Accuracy': round(acc_test, 2)
   })
 
 st.subheader("Comparing models metrics")
 st.table(pd.DataFrame(results))
+
+st.sidebar.header("Prediction based on features")
+island_input = st.sidebar.selectbox("Island", df['island'].unique())
+sex_input = st.sidebar.selectbox("Sex", df['sex'].unique())
+bill_length_input = st.sidebar.slider("Bill Length (mm)", float(df['bill_length_mm'].min()), float(df['bill_length_mm'].max()), float(df['bill_length_mm'].mean()))
+bill_depth_input = st.sidebar.slider("Bill Depth (mm)", float(df['bill_depth_mm'].min()), float(df['bill_depth_mm'].max()), float(df['bill_depth_mm'].mean()))
+flipper_length_input = st.sidebar.slider("Flipper Length (mm)", float(df['flipper_length_mm'].min()), float(df['flipper_length_mm'].max()), float(df['flipper_length_mm'].mean()))
+body_mass_input = st.sidebar.slider("Body Mass (g)", float(df['body_mass_g'].min()), float(df['body_mass_g'].max()), float(df['body_mass_g'].mean()))
