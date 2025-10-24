@@ -4,4 +4,4 @@ The app presents an analysis of different penguin breeds characteristics. An int
 
 ## Demo App
 
-[![Streamlit App](https://first-deployed-model-aiacademy.streamlit.app/)
+[!Streamlit App](https://first-deployed-model-aiacademy.streamlit.app/)
